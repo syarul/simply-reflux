@@ -6,5 +6,5 @@ Simplest way to understand react + flux using [reflux](https://github.com/reflux
 clone repo
 npm install && bower install
 gulp
-``
+```
 BrowserSync up and start hacking with live reload.
