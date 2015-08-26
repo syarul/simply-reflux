@@ -37,7 +37,7 @@
             );
         }
     });
-
+    //Only works with HTML5 PushState or remove ReactRouter.HistoryLocation at line 81
     var NotFoundRoute = React.createClass({
 
         render: function() {
@@ -68,15 +68,17 @@
 
     //Declare routing on app init
     var routes = (
-        <ReactRouter.Route path="/" handler={App}>
-            <ReactRouter.Route name="other" handler={OtherPage} />
-            <ReactRouter.Route name="about" handler={About} />
-            <ReactRouter.DefaultRoute name="docount" handler={DoCount} />
-            <ReactRouter.NotFoundRoute handler={NotFoundRoute} />
-        </ReactRouter.Route>
+        
+            <ReactRouter.Route path="/" handler={App}>
+                <ReactRouter.Route name="other" handler={OtherPage} />
+                <ReactRouter.Route name="about" handler={About} />
+                <ReactRouter.DefaultRoute name="docount" handler={DoCount} />
+                <ReactRouter.NotFoundRoute handler={NotFoundRoute} />
+            </ReactRouter.Route>
+        
     );
 
-    ReactRouter.run(routes, function(Handler) {
+    ReactRouter.run(routes, ReactRouter.HistoryLocation, function(Handler) {
         React.render(<Handler/>, document.getElementById('content'));
     });
 

@@ -23,10 +23,11 @@
   "dependencies": {
     "react": "^0.13.3",
     "react-router": "^0.13.3",
-    "reflux":"0.2.12"
+    "reflux": "0.2.12"
   },
   "devDependencies": {
     "browser-sync": "^2.8.2",
-    "gulp": "^3.9.0"
+    "gulp": "^3.9.0",
+    "pushstate-server": "^1.6.0"
   }
 }
