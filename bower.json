@@ -1,8 +1,0 @@
-{
-  "name": "isomorphic-reflux",
-  "version": "0.0.1",
-  "dependencies": {
-    "reflux": "~0.2.4",
-    "react-router": "~0.11.6"
-  }
-}
