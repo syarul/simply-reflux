@@ -14,7 +14,8 @@ gulp.task('init', function() {
       'node_modules/react/dist/react.js',
       'node_modules/react/dist/JSXTransformer.js',
       'node_modules/react-router/umd/ReactRouter.js',
-      'node_modules/reflux/dist/reflux.js'
+      'node_modules/reflux/dist/reflux.js',
+      'node_modules/reactfire/dist/reactfire.js'
     ])
     .pipe(gulp.dest('src/lib'));
 });

@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 
-(function(React, ReactRouter, Reflux, TodoActions, todoListStore, global) {
+(function(React, ReactRouter, Reflux, TodoActions, todoListStore, Firebase, ReactFireMixin, global) {
     var DoCount = React.createClass({
 
         // assign store data to props
@@ -17,13 +17,50 @@
             );
         }
     });
-    var OtherPage = React.createClass({
-
+    var FirebaseApp = React.createClass({
+        //testing firebase+react
+        mixins: [ReactFireMixin],
+        getInitialState: function() {
+            var temp = "retriving firebase data..";
+            return {
+              singleObject: {
+                '.key': temp,
+                '.value': temp,
+              },
+              array: {
+                '.key': temp,
+                'name': temp,
+                'age': temp
+              }
+            };
+          },
+        componentWillMount() {
+            this.bindAsObject(new Firebase("https://scorching-inferno-2673.firebaseio.com/data"), "singleObject");
+            this.bindAsObject(new Firebase("https://scorching-inferno-2673.firebaseio.com/items"), "array");
+        },
         render: function() {
+            var datafromfirebase = this.state.singleObject;
+            var arrayfromfirebase = this.state.array;
+            //console.log(this.state.array)
             return (
-                <h1 className="header">
-                   Other Page
-                </h1>
+                <div>
+                    <h1 className="header">
+                       Firebase Test
+       
+                    </h1>
+                    <p>Object</p>
+                    <ul>
+                    <li>key: {datafromfirebase['.key']}</li>
+                    <li>value: {datafromfirebase['.value']}</li>
+                    </ul>
+                    <p>Array</p>
+                    <ul>
+                    <li>key: {arrayfromfirebase['.key']}</li>
+                    <li>name: {arrayfromfirebase['name']}</li>
+                    <li>age: {arrayfromfirebase['age']}</li>
+                    </ul>
+                </div>
+         
             );
         }
     });
@@ -57,7 +94,7 @@
                 <div className="App">
                     <ul>
                         <li><ReactRouter.Link to="docount">Do Count</ReactRouter.Link></li>
-                        <li><ReactRouter.Link to="other">Other Page</ReactRouter.Link></li>
+                        <li><ReactRouter.Link to="firebase">Firebase Test</ReactRouter.Link></li>
                         <li><ReactRouter.Link to="about">About</ReactRouter.Link></li>
                     </ul>
                     <ReactRouter.RouteHandler count={this.state.count}/>
@@ -70,7 +107,7 @@
     var routes = (
         
             <ReactRouter.Route path="/" handler={App}>
-                <ReactRouter.Route name="other" handler={OtherPage} />
+                <ReactRouter.Route name="firebase" handler={FirebaseApp} />
                 <ReactRouter.Route name="about" handler={About} />
                 <ReactRouter.DefaultRoute name="docount" handler={DoCount} />
                 <ReactRouter.NotFoundRoute handler={NotFoundRoute} />
@@ -82,4 +119,4 @@
         React.render(<Handler/>, document.getElementById('content'));
     });
 
-})(window.React, window.ReactRouter, window.Reflux, window.TodoActions, window.todoListStore, window);
+})(window.React, window.ReactRouter, window.Reflux, window.TodoActions, window.todoListStore, window.Firebase, window.ReactFireMixin, window);
