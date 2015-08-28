@@ -1,13 +1,10 @@
 var express = require('express');
 var path = require('path');
 var httpProxy = require('http-proxy');
-
+var modRewrite = require('connect-modrewrite');
+var compression = require('compression');
 var proxy = httpProxy.createProxyServer(); 
 var app = express();
-var modRewrite = require('connect-modrewrite');
-//var serveStatic = require('serve-static');
-var compression = require('compression');
-
 var isProduction = process.env.NODE_ENV === 'production';
 var port = isProduction ? 8080 : 3001;
 var publicPath = path.resolve(__dirname, 'build');
@@ -15,10 +12,8 @@ var publicPath = path.resolve(__dirname, 'build');
 app.use(modRewrite([
       '!\\.html|\\.js|\\.json|\\.ico|\\.csv|\\.css|\\.png|\\.svg|\\.eot|\\.ttf|\\.woff|\\.appcache|\\.jpg|\\.jpeg|\\.gif /index.html [L]'
     ]));
-    app.use(compression());
-
+app.use(compression());
 app.use(express.static(publicPath));
-//app.use(serveStatic(publicPath));
 
 // We only want to run the workflow when not in production
 if (!isProduction) {
