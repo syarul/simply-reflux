@@ -41,7 +41,6 @@
     "eslint-loader": "^1.0.0",
     "eslint-plugin-react": "^3.3.0",
     "http-proxy": "^1.11.1",
-    "pushstate-server": "^1.6.0",
     "react-hot-loader": "^1.2.9"
   }
 }
